@@ -20,9 +20,9 @@ On every commit the following scripts are run
 ## Setting up Project 👨🏾‍💻
 
 ```
-git clone https://github.com/MC-Haut/marble-web.git
+git clone https://github.com/hackib-dev/starter-pack.git
 # or with the Github CLI
-gh repo clone MC-Haut/marble-web
+gh repo clone hackib-dev/starter-pack
 
 cd starter-pack
 yarn
