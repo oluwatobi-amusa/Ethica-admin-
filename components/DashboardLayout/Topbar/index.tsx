@@ -23,7 +23,7 @@ const TopBar: React.FC<TopBarProps> = ({ onToggleSidebar, isSidebarOpen }) => {
   } = useAppSelector((state) => state.userService);
 
   return (
-    <nav className="flex items-center justify-between border-b-[1px] border-gray-200 bg-white md:p-1.5 lg:ml-72">
+    <nav className="flex items-center justify-between border-b-[1px] border-gray-200 bg-white md:p-1.5 lg:ml-60">
       <div className="flex items-center gap-4">
         <button
           onClick={onToggleSidebar}
@@ -32,7 +32,7 @@ const TopBar: React.FC<TopBarProps> = ({ onToggleSidebar, isSidebarOpen }) => {
           <BiMenu size={20} />
         </button>
 
-        <div className="flex items-center justify-between text-sm py-4 px-5">
+        <div className="flex items-center justify-between text-sm p-2">
           <div className="flex items-center gap-2">
             {!!pathname?.split('/')[2] ? (
               <>

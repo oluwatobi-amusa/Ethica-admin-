@@ -42,7 +42,7 @@ const Sidebar: FC<SidebarProps> = ({ isSidebarOpen = true, onToggleSidebar }) =>
 
       <div
         className={cn(
-          'fixed left-0 top-0 z-50 flex h-full w-72 flex-col bg-white border-r border-gray-200  transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0',
+          'fixed left-0 top-0 z-50 flex h-full w-60 flex-col bg-white border-r border-gray-200  transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0',
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
@@ -56,8 +56,8 @@ const Sidebar: FC<SidebarProps> = ({ isSidebarOpen = true, onToggleSidebar }) =>
         </div>
 
         {/* Navigation Links */}
-        <div className="flex-1 overflow-y-auto px-4 py-6">
-          <div className="space-y-2">
+        <div className="flex-1 overflow-y-auto px-2 py-3">
+          <div className="space-y-1">
             {LINKS.map((link, Idx) => {
               const SideBarIcon = link.icon;
               // Use groupName for the first link (Overview), otherwise use the link name
@@ -78,7 +78,7 @@ const Sidebar: FC<SidebarProps> = ({ isSidebarOpen = true, onToggleSidebar }) =>
                 >
                   <div
                     className={cn(
-                      'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-100',
+                      'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-100',
                       isActive && 'bg-blue-50 text-starter-primary shadow-sm'
                     )}
                   >
@@ -95,10 +95,10 @@ const Sidebar: FC<SidebarProps> = ({ isSidebarOpen = true, onToggleSidebar }) =>
         </div>
 
         {/* User Profile Section */}
-        <div className="border-t border-gray-200 p-4">
+        <div className="border-t border-gray-200 p-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">
-              <BiUser className="h-5 w-5 text-gray-600" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200">
+              <BiUser className="h-4 w-4 text-gray-600" />
             </div>
             <div className="flex-1 min-w-0">
               <TopBarDropdownMenu />

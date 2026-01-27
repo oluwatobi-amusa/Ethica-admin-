@@ -41,9 +41,11 @@ const TopBarDropdownMenu = () => {
       <DropdownMenuTrigger asChild>
         <div className="flex-1 min-w-0 cursor-pointer">
           <p className="truncate text-sm font-medium text-gray-900">
-            {initialRenderComplete ? email || 'aqibkenn@gmail.com' : 'aqibkenn@gmail.com'}
+            {initialRenderComplete ? email || 'aqibkenn@gmail.com' : ''}
           </p>
-          <p className="truncate text-xs text-gray-500">{initialRenderComplete ? name : ''}</p>
+          <p className="truncate text-xs text-gray-500">
+            {initialRenderComplete ? name || 'Aqib Akinyele' : ''}{' '}
+          </p>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">

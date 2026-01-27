@@ -25,16 +25,14 @@ export default function Layout({ children }: LayoutProps) {
         </div>
 
         <div className="flex h-full">
-          <div className="lg:w-72 lg:flex-shrink-0">
+          <div className="lg:w-60 lg:flex-shrink-0">
             <div className="fixed left-0 top-0 z-50 h-full  lg:relative">
               <SideBar isSidebarOpen={isSidebarOpen} onToggleSidebar={toggleSidebar} />
             </div>
           </div>
 
           <div className="flex-1 flex flex-col overflow-hidden">
-            <div className="relative mt-[80px] h-full min-h-[calc(100vh-80px)] overflow-y-auto p-6">
-              {children}
-            </div>
+            <div className="relative mt-[52px] md:mt-[80px] overflow-y-auto p-3">{children}</div>
           </div>
         </div>
       </div>

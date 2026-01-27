@@ -2,12 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* styles/globals.css */
+/* =============================================================================
+   FLUID RESPONSIVE SIZING SYSTEM
+
+   ALL Tailwind defaults overridden with fluid sizing for pixel-perfect scaling.
+   Scales smoothly between 375px (mobile) and 1440px (desktop).
+
+   How it works:
+   - Root font-size scales fluidly between 14px (mobile) and 16px (desktop)
+   - ALL text sizes (text-xs to text-9xl) scale fluidly with viewport
+   - ALL spacing values (p-1 to p-96, m-4, gap-8, etc.) scale fluidly with viewport
+   - Use standard Tailwind syntax - everything just works and scales automatically
+
+   Examples:
+   - text-2xl, text-4xl → Fluid typography
+   - p-4, p-8, p-16 → Fluid padding
+   - m-2, m-6, m-12 → Fluid margins
+   - gap-4, space-x-8 → Fluid gaps
+   - w-64, h-96 → Fluid width/height
+   ============================================================================= */
+
+/*
+   Fluid Root Font Size
+   - Min: 14px at 375px viewport
+   - Max: 16px at 1440px viewport
+   - Scales linearly between these breakpoints
+
+   Formula: clamp(min, preferred, max)
+   Preferred = min + (max - min) * ((100vw - minVw) / (maxVw - minVw))
+   Simplified: 14px + (16 - 14) * ((100vw - 375px) / (1440 - 375))
+             = 14px + 2 * ((100vw - 375px) / 1065)
+             = 14px + 0.188vw - 0.704px
+             ≈ 13.3px + 0.188vw
+*/
+:root {
+  /* Fluid base sizing - scales root font between 14px (mobile) and 16px (desktop) */
+  font-size: clamp(0.875rem, 0.831rem + 0.188vw, 1rem);
+}
+
+/* Prevent text inflation on mobile */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* =============================================================================
+   CUSTOM FONTS
+   ============================================================================= */
+
 @font-face {
   font-family: 'Euclid Circular A';
   src: url('/fonts/Euclid_Circular_Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -15,6 +63,7 @@
   src: url('/fonts/Euclid_Circular_Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -22,6 +71,7 @@
   src: url('/fonts/Euclid_Circular_SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -29,6 +79,7 @@
   src: url('/fonts/Euclid_Circular_Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 html {
@@ -151,13 +202,4 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #a5a5a5;
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }
