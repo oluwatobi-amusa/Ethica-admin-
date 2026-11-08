@@ -1,14 +1,10 @@
-import { IconType } from 'react-icons/lib';
-import { BiBookAlt, BiMenu } from 'react-icons/bi';
-import { BsFillGridFill } from 'react-icons/bs';
-import { HiUsers } from 'react-icons/hi2';
-import { PiChartLineFill } from 'react-icons/pi';
-import { HiMiniGift } from 'react-icons/hi2';
+import type { LucideIcon } from 'lucide-react';
+import { Activity, Banknote, CircleGauge, Settings2, UsersRound } from 'lucide-react';
 
 export const LINK_ICON_STYLE = { height: '20px', width: '20px' };
 
 export type SideBarLink = {
-  icon: IconType;
+  icon: LucideIcon;
   name: string;
   url: string;
 };
@@ -17,8 +13,28 @@ export type SideBarLinks = SideBarLink[];
 
 export const LINKS: SideBarLinks = [
   {
-    name: 'Overview',
+    name: 'Dashboard',
     url: '/dashboard',
-    icon: BsFillGridFill
+    icon: CircleGauge
+  },
+  {
+    name: 'Customers',
+    url: '/customers',
+    icon: UsersRound
+  },
+  {
+    name: 'Transactions',
+    url: '/transactions',
+    icon: Banknote
+  },
+  {
+    name: 'Service activity',
+    url: '/service-activity',
+    icon: Activity
+  },
+  {
+    name: 'Admin settings',
+    url: '/admin-settings',
+    icon: Settings2
   }
 ];

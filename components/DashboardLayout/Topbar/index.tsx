@@ -1,13 +1,8 @@
 'use client';
 
-import MarbleLogo from '@/public/Logo.svg';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import TopBarDropdownMenu from './DropDown';
-import { BiMenu } from 'react-icons/bi';
-import { useInitialRender } from '@/hooks';
-import { useAppSelector } from '@/store/hooks';
+import { FormEvent, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, Search } from 'lucide-react';
 
 interface TopBarProps {
   onToggleSidebar?: () => void;
@@ -16,45 +11,91 @@ interface TopBarProps {
 
 const TopBar: React.FC<TopBarProps> = ({ onToggleSidebar, isSidebarOpen }) => {
   const pathname = usePathname();
-  const initialRenderComplete = useInitialRender();
+  const router = useRouter();
+  const [query, setQuery] = useState('');
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const title = pathname.split('/').filter(Boolean).slice(0, 1)[0] || 'dashboard';
+  const pageTitle = pathname.startsWith('/customers/')
+    ? 'Customer profile'
+    : title.replaceAll('-', ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
 
-  const {
-    user: { email }
-  } = useAppSelector((state) => state.userService);
+  const submitSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const value = query.trim();
+    setMobileSearchOpen(false);
+    router.push(value ? `/customers?search=${encodeURIComponent(value)}` : '/customers');
+  };
 
   return (
-    <nav className="flex items-center justify-between border-b-[1px] border-gray-200 bg-white md:p-1.5 lg:ml-60">
-      <div className="flex items-center gap-4">
+    <nav
+      className="relative flex h-16 items-center justify-between gap-3 border-b border-[var(--color-outline)] bg-white px-3 sm:px-6 lg:ml-60"
+      aria-label="Top navigation"
+    >
+      <div className="flex min-w-0 items-center gap-3">
         <button
+          type="button"
           onClick={onToggleSidebar}
-          className="rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 lg:hidden"
+          aria-label={isSidebarOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          className="flex h-10 w-10 items-center justify-center rounded-[8px] text-[var(--portal-secondary)] hover:bg-[var(--color-faded-gray-10)] lg:hidden"
         >
-          <BiMenu size={20} />
+          <Menu size={18} aria-hidden="true" />
         </button>
-
-        <div className="flex items-center justify-between text-sm p-2">
-          <div className="flex items-center gap-2">
-            {!!pathname?.split('/')[2] ? (
-              <>
-                <p className="capitalize text-gray-400">Customers</p>
-                <p>/</p>
-                <p className="font-semibold capitalize">
-                  {pathname.split('/')[2].split('-').join(' ')}
-                </p>
-              </>
-            ) : (
-              // <p className="text-black">Dashboard</p>
-
-              <div className="flex-1 min-w-0">
-                <p className=" text-sm font-medium text-gray-900">
-                  {initialRenderComplete ? email || 'Aqib Akinyele' : 'Aqib Akinyele'}
-                </p>
-                <p className=" text-xs text-gray-500">Welcome back to Starter Pack 👋🏻</p>
-              </div>
-            )}
-          </div>
+        <div className="min-w-0">
+          <p className="truncate text-sm font-bold text-[var(--color-black)]">{pageTitle}</p>
+          <p className="hidden text-xs text-[var(--portal-secondary)] sm:block">
+            Ethica mobile banking operations
+          </p>
         </div>
       </div>
+      <form className="hidden w-full max-w-[390px] md:block" onSubmit={submitSearch} role="search">
+        <label className="relative block">
+          <span className="sr-only">Search customers</span>
+          <Search
+            size={16}
+            aria-hidden="true"
+            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-gray)]"
+          />
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search customers, phone or ID"
+            className="h-10 w-full rounded-[8px] border border-[var(--color-outline)] bg-[var(--color-faded-gray-10)] pl-9 pr-3 text-sm outline-none focus:border-[var(--color-primary)] focus:bg-white"
+          />
+        </label>
+      </form>
+      <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+        <button
+          type="button"
+          aria-label="Search customers"
+          onClick={() => setMobileSearchOpen((open) => !open)}
+          className="flex h-10 w-10 items-center justify-center rounded-full text-[var(--portal-secondary)] hover:bg-[var(--color-faded-gray-10)] md:hidden"
+        >
+          <Search size={18} aria-hidden="true" />
+        </button>
+      </div>
+      {mobileSearchOpen && (
+        <form
+          className="absolute left-3 right-3 top-[58px] z-50 rounded-[8px] border border-[var(--color-outline)] bg-white p-2 shadow-lg md:hidden"
+          onSubmit={submitSearch}
+          role="search"
+        >
+          <label className="relative block">
+            <span className="sr-only">Search customers</span>
+            <Search
+              size={16}
+              aria-hidden="true"
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-gray)]"
+            />
+            <input
+              autoFocus
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search name, phone or customer ID"
+              className="h-11 w-full rounded-[8px] border border-[var(--color-outline)] pl-9 pr-3 text-sm outline-none focus:border-[var(--color-primary)]"
+            />
+          </label>
+        </form>
+      )}
     </nav>
   );
 };

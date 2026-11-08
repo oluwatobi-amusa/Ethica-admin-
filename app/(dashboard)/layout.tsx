@@ -19,7 +19,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <HOCLayout />
-      <div className="h-screen overflow-hidden">
+      <div className="h-screen overflow-hidden bg-[var(--color-faded-gray-10)]">
         <div className="fixed right-0 top-0 z-30 w-full max-w-full">
           <TopBar onToggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         </div>
@@ -32,7 +32,9 @@ export default function Layout({ children }: LayoutProps) {
           </div>
 
           <div className="flex-1 flex flex-col overflow-hidden">
-            <div className="relative mt-[52px] md:mt-[80px] overflow-y-auto p-3">{children}</div>
+            <main className="relative mt-16 min-h-0 flex-1 overflow-y-auto p-4 sm:p-6 xl:p-10">
+              <div className="mx-auto w-full max-w-[1200px]">{children}</div>
+            </main>
           </div>
         </div>
       </div>

@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #009148;
+  --color-faded-primary-10: #e5f4ed;
+  --color-faded-primary-40: #99d3b6;
+  --color-warning-10: #fff5e5;
+  --color-warning-40: #ff9900;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-gray: #a4a4a4;
+  --color-faded-gray-10: #f7f7f7;
+  --color-outline: #ebebeb;
+  --color-card-border: #c4c4c4;
+  --portal-secondary: var(--color-black);
+}
+
 /* =============================================================================
    FLUID RESPONSIVE SIZING SYSTEM
 
@@ -83,7 +98,22 @@ html {
 }
 
 html {
-  font-family: 'Euclid Circular A', sans-serif;
+  font-family: 'Schibsted Grotesk', 'Montserrat', 'Euclid Circular A', system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-faded-gray-10);
+  color: var(--color-black);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.portal-card {
+  border: 1px solid var(--color-card-border);
+  border-bottom-width: 4px;
+  border-radius: 10px;
+  background: var(--color-white);
 }
 
 @layer base {
@@ -192,14 +222,14 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--color-faded-gray-10);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c5c5c5;
+  background: var(--color-faded-primary-40);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a5a5a5;
+  background: var(--color-primary);
 }

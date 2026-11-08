@@ -1,5 +1,13 @@
 # Starter Pack
 
+## Ethica bank operations portal
+
+The dashboard is a frontend-only mobile banking operations demo built into the existing Next.js app. Open `/dashboard` for the operational overview, then use the sidebar to browse customers, transactions, service activity and admin settings. Customer profiles are available from the customer list.
+
+The portal uses fictional sample customers and transactions from `components/MicrofinancePortal/data.ts`. Customer support actions, audit entries and statement exports are demos only and do not connect to a bank service. Do not enter real customer data or credentials. Demo audit entries are stored in the current browser session.
+
+The existing Till Management route is retained alongside the portal navigation.
+
 ## Tech Stack 🥞
 
 - [NextJS](https://nextjs.org/)

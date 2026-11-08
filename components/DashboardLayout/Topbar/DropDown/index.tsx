@@ -1,6 +1,5 @@
-import { EditIcon, LogOut } from 'lucide-react';
-import { usePathname, useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+import { LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,7 +28,6 @@ const TopBarDropdownMenu = () => {
     toast('Successfully Logout', { closeButton: true, richColors: true });
   };
 
-  const pathname = usePathname();
   const initialRenderComplete = useInitialRender();
 
   const {
@@ -39,17 +37,17 @@ const TopBarDropdownMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex-1 min-w-0 cursor-pointer">
+        <button type="button" className="min-w-0 flex-1 cursor-pointer text-left">
           <p className="truncate text-sm font-medium text-gray-900">
-            {initialRenderComplete ? email || 'aqibkenn@gmail.com' : ''}
+            {initialRenderComplete ? email || 'ada.okonkwo@demo.example' : ''}
           </p>
           <p className="truncate text-xs text-gray-500">
-            {initialRenderComplete ? name || 'Aqib Akinyele' : ''}{' '}
+            {initialRenderComplete ? name || 'Ada Okonkwo' : ''}
           </p>
-        </div>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>My account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer" onClick={logoutAction}>
           <LogOut className="mr-2 h-4 w-4" />
